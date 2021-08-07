@@ -17,12 +17,10 @@ function App() {
       const routesObject = (data.data);
       const keys =  Object.keys(routesObject);
       const values = Object.values(routesObject);
-      console.log(values);
       setUrlRoutes(keys);
       setnavLabels(values);
     }
     fetchRoutes();
-
   }, []);
 
   return (
