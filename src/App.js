@@ -22,14 +22,16 @@ function App() {
       setnavLabels(values);
     }
     fetchRoutes();
+
   }, []);
 
   return (
 
     <div className="App">
       <nav>
-        <NavLink to={`${urlRoutes[0]}`}>{navLabels[0]}</NavLink>
-        <NavLink to={`${urlRoutes[1]}`}>{navLabels[1]}</NavLink>
+        {urlRoutes.map((route, i) => (
+          <NavLink to={`${route}`}>{navLabels[i]}</NavLink>
+        ))}
       </nav>
       <Switch>
         <Route path={`${urlRoutes[0]}`} exact component={FirstRoute} />
