@@ -34,7 +34,7 @@ function App() {
       <Switch>
         <Route path={`${urlRoutes[0]}`} exact component={FirstRoute} />
         <Route path={`${urlRoutes[1]}`} exact component={SecondRoute} />
-        <Redirect to={"/"} />
+        <Redirect to={`${urlRoutes[0]}`} />
       </Switch>
     </div>
   );
