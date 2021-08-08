@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
-import Store from './Store';
+import { createStore } from "redux"
 import { BrowserRouter } from "react-router-dom";
+import allReducers from "./reducers"
+
+const store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={Store}>
+      <Provider store={store}>
         <App />
       </Provider>
     </BrowserRouter>
