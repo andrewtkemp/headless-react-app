@@ -3,7 +3,9 @@
 const navRoutes = (state = {}, action) => {
     switch (action.type) {
         case 'LOAD':
-            return {...state, 'stuff': 1};
+            console.log(state);
+            console.log(action);
+            return {...action.payload};
         default:
             return state;
     }

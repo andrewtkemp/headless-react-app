@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch } from "react-redux"
+import { GetRoutes } from "../utils/API"
 
 export const increment = () => {
     return {
@@ -7,8 +9,14 @@ export const increment = () => {
 }
 
 export const loadUrls = () => {
-    return {
-        type: 'LOAD'
-    }
+    return GetRoutes()
+    .then((res) => {
+        console.log(res);
+        return {
+            type: 'LOAD',
+            payload: res.data,
+        }
+    });
+    
 }
 

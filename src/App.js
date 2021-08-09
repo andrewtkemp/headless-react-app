@@ -13,6 +13,7 @@ function App() {
 
   const counter = useSelector(state => state.counter);
   const urls = useSelector(state => state.navRoutes);
+  console.log(urls);
 
   const dispatch = useDispatch();
 
@@ -22,18 +23,24 @@ function App() {
   useEffect(() => {
     async function fetchRoutes() {
       dispatch(increment())
-      dispatch(loadUrls())
+      handleLoadUrls();
+      // const data = await API.GetRoutes();
+      // const routesObject = (data.data);
+      // const keys = Object.keys(routesObject);
+      // const values = Object.values(routesObject);
 
-      const data = await API.GetRoutes();
-      const routesObject = (data.data);
-      const keys = Object.keys(routesObject);
-      const values = Object.values(routesObject);
-      setUrlRoutes(keys);
-      setnavLabels(values);
+      setUrlRoutes(Object.keys(urls));
+      setnavLabels(Object.values(urls));
       
     }
     fetchRoutes();
   }, []);
+
+  const handleLoadUrls = async () => {
+    const res = await loadUrls();
+    dispatch(res);
+  };
+
 
   return (
     <>
@@ -41,14 +48,14 @@ function App() {
       {console.log('load urls', urls)}
       <div className="App">
         <nav>
-          {urlRoutes.map((route, i) => (
+          {urlRoutes && urlRoutes.length > 0 ? (urlRoutes.map((route, i) => (
             <NavLink key={navLabels[i]} to={`${route}`}>{navLabels[i]}</NavLink>
-          ))}
+          ))) : null}
         </nav>
         <Switch>
           <Route path={`${urlRoutes[0]}`} exact component={FirstRoute} />
           <Route path={`${urlRoutes[1]}`} exact component={SecondRoute} />
-          <Redirect to={`${urlRoutes[0]}`} />
+          {/* <Redirect to={`${urlRoutes[0]}`} /> */}
         </Switch>
       </div>
 
